@@ -12,7 +12,7 @@ const calculateBmi = (height: number, weight: number): string => {
   if(bmi <= 29.9) { return "Overweight (Pre-obese)"; }
   if(bmi <= 34.9) { return "Obese (Class I)"; }
   if(bmi <= 39.9) { return "Obese (Class II)"; }
-  if(bmi >= 40.0) { return "Obese (Class III)"; }
+  if(bmi > 39.9) { return "Obese (Class III)"; }
 }
 
 console.log(calculateBmi(180, 74));
