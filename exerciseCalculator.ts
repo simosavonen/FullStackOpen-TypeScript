@@ -8,9 +8,9 @@ interface Result {
   average: number;
 }
 
-interface ExerciseHours {
+export interface ExerciseHours {
   target: number;
-  hours: Array<number>;
+  daily_exercises: Array<number>;
 }
 
 const parseArguments = (args: Array<string>): ExerciseHours => {
@@ -18,7 +18,7 @@ const parseArguments = (args: Array<string>): ExerciseHours => {
 
   const parsedArguments: ExerciseHours = {
     target: 0,
-    hours: []
+    daily_exercises: []
   };
 
   for (let i = 2; i < args.length; i++) {
@@ -30,31 +30,31 @@ const parseArguments = (args: Array<string>): ExerciseHours => {
     if (!parsedArguments.target) {
       parsedArguments.target = numberArgument;
     } else {
-      parsedArguments.hours.push(numberArgument);
+      parsedArguments.daily_exercises.push(numberArgument);
     }
   }
 
   return parsedArguments;
 };
 
-const calculateExercises = (exerciseHours: ExerciseHours): Result => {  
-  
+export const calculateExercises = (exerciseHours: ExerciseHours): Result => {
+
   const rating = (average: number, target: number): number => {
-    if(average >= target) return 3;
-    if(average >= target * 0.7) return 2;
+    if (average >= target) return 3;
+    if (average >= target * 0.7) return 2;
     return 1;
   };
 
   const ratingDescription = (rating: number): string => {
-    if(rating === 3) return 'You reached your target!';
-    if(rating === 2) return 'You nearly reached your target.';
+    if (rating === 3) return 'You reached your target!';
+    if (rating === 2) return 'You nearly reached your target.';
     return 'You missed your target, was it set too high?';
   };
 
   const result: Result = {
-    periodLength: exerciseHours.hours.length,
-    trainingDays: exerciseHours.hours.filter(h => h > 0).length,
-    average: exerciseHours.hours.reduce((a, b) => (a + b)) / exerciseHours.hours.length,
+    periodLength: exerciseHours.daily_exercises.length,
+    trainingDays: exerciseHours.daily_exercises.filter(h => h > 0).length,
+    average: exerciseHours.daily_exercises.reduce((a, b) => (a + b)) / exerciseHours.daily_exercises.length,
     target: exerciseHours.target,
     success: false,
     rating: 0,
