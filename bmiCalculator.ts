@@ -13,17 +13,17 @@ const parseBmiArguments = (args: Array<string>): bmiParameters => {
   const bmiParams: bmiParameters = {
     height: Number(args[2]),
     weight: Number(args[3])
-  }
+  };
 
   if(bmiParams.height < 0 || bmiParams.weight < 0) 
-    throw new Error('Arguments need to be positive numbers!')
+    throw new Error('Arguments need to be positive numbers!');
 
   return bmiParams;
-}
+};
 
 export const calculateBmi = (bmiParams: bmiParameters): string => {
-  const heightInMeters = bmiParams.height / 100
-  const bmi = bmiParams.weight / (heightInMeters * heightInMeters)
+  const heightInMeters = bmiParams.height / 100;
+  const bmi = bmiParams.weight / (heightInMeters * heightInMeters);
 
   if(bmi <= 16.0) { return "Underweight (Severe thinness)"; }
   if(bmi <= 16.9) { return "Underweight (Moderate thinness)"; }
@@ -34,13 +34,13 @@ export const calculateBmi = (bmiParams: bmiParameters): string => {
   if(bmi <= 39.9) { return "Obese (Class II)"; }
   if(bmi > 39.9) { return "Obese (Class III)"; }
   return "should not see this";
-}
+};
 
 try {
-  const result = calculateBmi(parseBmiArguments(process.argv))
-  console.log(result)
+  const result = calculateBmi(parseBmiArguments(process.argv));
+  console.log(result);
 } catch (error: unknown) {
-  let errorMessage = 'Something went wrong.'
+  let errorMessage = 'Something went wrong.';
   if (error instanceof Error) {
     errorMessage += ' Error: ' + error.message;
   }
