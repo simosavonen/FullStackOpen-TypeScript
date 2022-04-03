@@ -21,7 +21,7 @@ const parseBmiArguments = (args: Array<string>): bmiParameters => {
   return bmiParams;
 }
 
-const calculateBmi = (bmiParams: bmiParameters): string => {
+export const calculateBmi = (bmiParams: bmiParameters): string => {
   const heightInMeters = bmiParams.height / 100
   const bmi = bmiParams.weight / (heightInMeters * heightInMeters)
 
@@ -33,6 +33,7 @@ const calculateBmi = (bmiParams: bmiParameters): string => {
   if(bmi <= 34.9) { return "Obese (Class I)"; }
   if(bmi <= 39.9) { return "Obese (Class II)"; }
   if(bmi > 39.9) { return "Obese (Class III)"; }
+  return "should not see this";
 }
 
 try {
